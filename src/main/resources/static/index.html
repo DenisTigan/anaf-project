@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Verificare CUI ANAF</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="logo-container">
+    <img src="image/anafLogo.png" alt="Logo ANAF" class="logo">
+</div>
+<div class="input_details">
+    <h2>Verifică o firmă</h2>
+    <form id="cuiForm">
+        <label for="cuiInput">CUI:</label>
+        <input type="text" id="cuiInput" name="cui" required>
+        <button type="submit">Caută</button>
+    </form>
+</div>
+
+<div id="resultSection" style="display:none;">
+    <h3>Rezultat:</h3>
+    <table id="resultTable">
+        <thead>
+        <tr>
+            <th>Câmp</th>
+            <th>Valoare</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.getElementById("cuiForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const cui = document.getElementById("cuiInput").value;
+        fetch(`/api/company/${cui}`)
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector("#resultTable tbody");
+                tableBody.innerHTML = ""; // curățare
+
+                const info = data.found?.[0]?.date_generale;
+                if (!info) {
+                    tableBody.innerHTML = "<tr><td colspan='2'>CUI invalid sau fără rezultat</td></tr>";
+                    return;
+                }
+
+                const fieldMap = {
+                    cui: "CUI",
+                    denumire: "Denumire",
+                    adresa: "Adresa",
+                    nrRegCom: "Nr. Reg. Com.",
+                    telefon: "Telefon",
+                    codPostal: "Cod Poștal",
+                    cod_CAEN: "Cod CAEN",
+                    forma_juridica: "Forma Juridică",
+                    statusRO_e_Factura: "RO e-Factura",
+                    data_inregistrare: "Data Inregistrare",
+                    "adresa_sediu_social.sdenumire_Judet": "Județ",
+                    "adresa_sediu_social.sdenumire_Localitate": "Localitate"
+                };
+
+                for (const key in fieldMap) {
+                    let value = key.includes(".")
+                        ? key.split(".").reduce((obj, prop) => obj?.[prop], data.found[0])
+                        : info[key];
+
+                    if (value !== undefined && value !== null) {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `<td>${fieldMap[key]}</td><td>${value}</td>`;
+                        tableBody.appendChild(row);
+                    }
+                }
+
+                document.getElementById("resultSection").style.display = "block";
+            })
+            .catch(error => {
+                console.error("Eroare la apel:", error);
+            });
+    });
+</script>
+
+</body>
+</html>
