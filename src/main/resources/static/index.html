@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <title>Verificare CUI ANAF</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 </head>
 <body>
 <div class="logo-container">
@@ -29,6 +34,10 @@
         <tbody>
         </tbody>
     </table>
+    <br>
+    <button onclick="exportToPDF()">Descarcă PDF</button>
+    <button onclick="exportToExcel()">Descarcă Excel</button>
+
 </div>
 
 <script>
@@ -80,6 +89,45 @@
                 console.error("Eroare la apel:", error);
             });
     });
+
+    function exportToPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        const rows = document.querySelectorAll("#resultTable tbody tr");
+
+        let y = 10;
+        rows.forEach(row => {
+            const cols = row.querySelectorAll("td");
+            const label = cols[0].textContent;
+            const value = cols[1].textContent;
+            doc.text(`${label}: ${value}`, 10, y);
+            y += 10;
+        });
+
+        doc.save("anaf_firma.pdf");
+    }
+
+    function exportToExcel() {
+        const rows = document.querySelectorAll("#resultTable tbody tr");
+        const data = [];
+
+        rows.forEach(row => {
+            const cols = row.querySelectorAll("td");
+            data.push({
+                Camp: cols[0].textContent,
+                Valoare: cols[1].textContent
+            });
+        });
+
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Rezultat");
+
+        XLSX.writeFile(workbook, "anaf_firma.xlsx");
+    }
+
+
+
 </script>
 
 </body>

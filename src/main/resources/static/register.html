@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<link rel="stylesheet" href="/css/styles2.css">
+<body>
+<div class="logo-container">
+    <img src="image/anafLogo.png" alt="Logo ANAF" class="logo">
+</div>
+<h2>Înregistrare</h2>
+<form id="registerForm">
+    <input type="text" name="username" placeholder="Username" required><br>
+    <input type="password" name="password" placeholder="Parola" required><br>
+    <button class = "btnreg" type="submit">Înregistrează-te</button>
+</form>
+<p>Ai deja cont? <a href="/login.html">Autentifică-te</a></p>
+
+<script>
+    document.getElementById("registerForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const params = new URLSearchParams(formData);
+
+        const res = await fetch('/auth/register', {
+            method: 'POST',
+            body: params
+        });
+
+        const text = await res.text();
+        alert(text);
+
+        if (text.includes("succes")) {
+            window.location.href = "/login.html";
+        }
+    });
+</script>
+</body>
+</html>
