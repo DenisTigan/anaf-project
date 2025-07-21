@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13a9a71d-31db-408a-8b24-b6c0199c8797" name="Changes" comment="login/register and export pdf/excel">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/github.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/linkedin.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styles2.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styles2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +110,13 @@
       <workItem from="1752176830807" duration="264000" />
       <workItem from="1752222902504" duration="236000" />
       <workItem from="1752231989623" duration="6980000" />
-      <workItem from="1752263997760" duration="3974000" />
+      <workItem from="1752263997760" duration="4644000" />
+      <workItem from="1752268798905" duration="2000" />
+      <workItem from="1752320391814" duration="630000" />
+      <workItem from="1752340564426" duration="4117000" />
+      <workItem from="1752436778365" duration="1810000" />
+      <workItem from="1752468465192" duration="1661000" />
+      <workItem from="1752593912922" duration="660000" />
     </task>
     <task id="LOCAL-00001" summary="front-end">
       <option name="closed" value="true" />
@@ -154,16 +153,5 @@
     <MESSAGE value="add workspace" />
     <MESSAGE value="login/register and export pdf/excel" />
     <option name="LAST_COMMIT_MESSAGE" value="login/register and export pdf/excel" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/service/UserService.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

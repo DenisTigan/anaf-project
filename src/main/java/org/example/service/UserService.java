@@ -8,6 +8,7 @@ import java.util.Map;
 public class UserService {
     private Map<String, String> users = new HashMap<>();
 
+    // modificare pentru test branch
     public boolean register(String username, String password) {
         if (users.containsKey(username)) return false;
         users.put(username, password);
